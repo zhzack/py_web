@@ -1,0 +1,23 @@
+name: TEST
+description: 测试
+
+script: test.py
+interpreter: python
+
+# 默认参数
+args:
+  - name: count
+    type: int
+    default: 5
+    help: 打印次数
+  - name: delay
+    type: float
+    default: 1.0
+    help: 每次打印间隔秒数
+
+env:
+  DEBUG: "1"
+  APP_ENV: dev
+
+workdir: .
+timeout: 600
