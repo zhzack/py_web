@@ -1,0 +1,49 @@
+/* ===============================
+   🌞 白天主题（默认）
+   =============================== */
+:root {
+    /* ====== Menu ====== */
+    --el-menu-bg-color: #ffffff;
+    --el-menu-text-color: #303133;
+    --el-menu-hover-bg-color: #ecf5ff;
+    --el-menu-active-color: #409eff;
+
+    /* ====== Table ====== */
+    --el-table-bg-color: #ffffff;
+    --el-table-tr-bg-color: #ffffff;
+    --el-table-header-bg-color: #f5f7fa;
+    --el-table-row-hover-bg-color: #f5f7fa;
+
+    /* ====== Input / Select ====== */
+    --el-input-bg-color: #ffffff;
+    --el-input-border-color: #dcdfe6;
+
+    /* ====== Card / Dialog ====== */
+    --el-card-bg-color: #ffffff;
+    --el-dialog-bg-color: #ffffff;
+}
+
+/* ===============================
+   🌙 黑夜主题
+   =============================== */
+[data-theme='dark'] {
+    /* ====== Menu ====== */
+    --el-menu-bg-color: #1f1f1f;
+    --el-menu-text-color: #cfd3dc;
+    --el-menu-hover-bg-color: #2a2a2a;
+    --el-menu-active-color: #409eff;
+
+    /* ====== Table ====== */
+    --el-table-bg-color: #1d1e1f;
+    --el-table-tr-bg-color: #1d1e1f;
+    --el-table-header-bg-color: #262727;
+    --el-table-row-hover-bg-color: #2a2a2a;
+
+    /* ====== Input / Select ====== */
+    --el-input-bg-color: #1d1e1f;
+    --el-input-border-color: #414243;
+
+    /* ====== Card / Dialog ====== */
+    --el-card-bg-color: #1d1e1f;
+    --el-dialog-bg-color: #1d1e1f;
+}
