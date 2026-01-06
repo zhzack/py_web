@@ -5,8 +5,9 @@ from app.core.logger.logger import logger
 from app.api.router import api_router
 from app.web.views.router import web_router
 from app.core.templates import *
+from app.core.config.config import settings
 
-app = FastAPI(title="Minimal Web Demo")
+app = FastAPI(title=settings.PROJECT_NAME, version="v0.1.0",debug=settings.DEBUG)
 
 
 # 允许开发阶段 Vue 热更新访问
@@ -32,3 +33,8 @@ app.mount("/", StaticFiles(directory=BASE_DIR /
 
 # 页面
 # app.include_router(web_router)
+
+if __name__ == "__main__":
+    import uvicorn
+    print("--- 正在启动服务 ---")
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)

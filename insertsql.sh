@@ -1,0 +1,1 @@
+mysql -u root -p vehicle_management < vehicle_data_backup.sql
