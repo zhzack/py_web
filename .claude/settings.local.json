@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wsl -- bash -c 'mysql -uroot -pRootStrongPassword -e \"SHOW DATABASES;\" 2>&1 | head -30')",
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(python -c \"import sys; print\\(sys.executable\\)\")",
+      "Bash(.venv/Scripts/pip.exe install *)",
+      "Bash(docker compose *)",
+      "Bash(rm -rf app/__pycache__ app/api/__pycache__ app/api/v1/__pycache__ app/api/v2/__pycache__ app/api/dev/__pycache__ app/core/__pycache__ app/core/config/__pycache__ app/database/__pycache__ app/services/__pycache__)",
+      "Bash(.venv/Scripts/python.exe tests/smoke_test.py)",
+      "Bash(.venv/Scripts/pip.exe show *)",
+      "Bash(pkill -f 'uvicorn app.main')",
+      "Bash(.venv/Scripts/python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000)",
+      "Bash(powershell -Command 'Get-Process python -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -like '\\\\''*uvicorn*'\\\\'' } | Stop-Process -Force')",
+      "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }')",
+      "Bash(npm run *)",
+      "Bash(rm -rf src/api src/components src/route src/store src/styles src/views src/utils src/main.js src/App.vue)",
+      "Bash(mkdir -p src/api src/composables src/layouts src/router src/stores src/styles src/views)",
+      "Bash(curl -s -o /dev/null -w 'HTTP %{http_code}\\\\n' http://127.0.0.1:8000/)",
+      "Bash(curl -s http://127.0.0.1:8000/api/v1/health)",
+      "Bash(curl -s http://127.0.0.1:8000/)",
+      "Bash(curl -s -o /dev/null -w 'HTTP %{http_code}\\\\n' http://127.0.0.1:8000/dashboard)",
+      "Bash(curl -s -o /dev/null -w 'HTTP %{http_code}\\\\n' 'http://127.0.0.1:8000/login?redirect=/dashboard')",
+      "Bash(netstat -ano)",
+      "Bash(tasklist //FI \"PID eq 33836\")",
+      "Bash(taskkill //PID 33836 //F)",
+      "Bash(docker buildx *)",
+      "Bash(curl -sI http://127.0.0.1:8000/)",
+      "Bash(curl -s http://127.0.0.1:8000/ -o /tmp/index.html)",
+      "Read(//tmp/**)",
+      "Bash(docker exec *)",
+      "Bash(tasklist //FI \"IMAGENAME eq Docker Desktop.exe\")",
+      "Bash(tasklist //FI \"IMAGENAME eq com.docker.backend.exe\")"
+    ]
+  }
+}

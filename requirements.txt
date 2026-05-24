@@ -1,9 +1,14 @@
 fastapi
-uvicorn
+uvicorn[standard]
 jinja2
 colorlog
-# pydantic
 pyyaml
 sqlalchemy
+pydantic
 pydantic_settings
 pymysql
+cryptography
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+redis

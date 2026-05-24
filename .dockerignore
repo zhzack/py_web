@@ -1,0 +1,36 @@
+# Build context excludes
+.git
+.gitignore
+.vscode
+.idea
+__pycache__
+**/__pycache__
+*.pyc
+*.pyo
+
+# logs / local data
+logs/
+*.log
+
+# vue build artifacts (rebuilt in Docker)
+vue-project/node_modules
+vue-project/dist
+vue-project/.vite
+
+# tests / docs not needed at runtime
+tests/
+makedown/
+
+# misc local stuff
+*.sh
+vehicle_data_backup.sql
+vehicle_management.sql
+createSql.sql
+buckupMysql.sh
+install_mysql.sh
+uninstall_mysql.sh
+insertsql.sh
+
+# env files — pass via compose / -e
+.env
+.env.*

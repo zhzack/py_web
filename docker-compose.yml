@@ -1,0 +1,67 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: py_web_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: RootStrongPassword
+      MYSQL_DATABASE: blue_db
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_general_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./deploy/sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pRootStrongPassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: py_web_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hid-gateway:latest
+    container_name: py_web_app
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      MYSQL_SERVER: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: RootStrongPassword
+      MYSQL_DB: blue_db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      QUEUE_BACKEND: memory
+      JWT_SECRET: ChangeMeInProduction_LongRandomString
+      BACKEND_CORS_ORIGINS: '["http://localhost","http://127.0.0.1","http://localhost:8000"]'
+      TZ: Asia/Shanghai
+    ports:
+      - "8000:8000"
+
+volumes:
+  mysql_data:
+  redis_data:
