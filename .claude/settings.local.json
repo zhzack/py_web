@@ -30,7 +30,8 @@
       "Read(//tmp/**)",
       "Bash(docker exec *)",
       "Bash(tasklist //FI \"IMAGENAME eq Docker Desktop.exe\")",
-      "Bash(tasklist //FI \"IMAGENAME eq com.docker.backend.exe\")"
+      "Bash(tasklist //FI \"IMAGENAME eq com.docker.backend.exe\")",
+      "Bash(grep -E '__pycache__|\\\\.pyc$')"
     ]
   }
 }
