@@ -1,1 +1,0 @@
-CREATE DATABASE vehicle_management CHARACTER SET utf8mb4;
