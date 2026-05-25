@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from _common import PROJECT_ROOT, cyn, grn, red, run  # noqa: E402
+from scripts.py._common import PROJECT_ROOT, cyn, grn, red, run  # noqa: E402
 
 
 def main():

@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from _common import COMPOSE_SERVICE, cyn, grn, require_docker, run  # noqa: E402
+from scripts.py._common import COMPOSE_SERVICE, cyn, grn, require_docker, run  # noqa: E402
 
 
 def main():

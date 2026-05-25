@@ -16,7 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from _common import APP_PORT, PROJECT_ROOT, cyn, grn, kill_pid, port_in_use, port_pids, red, safe_kill_pid, yel  # noqa: E402
+from scripts.py._common import APP_PORT, PROJECT_ROOT, cyn, grn, kill_pid, port_in_use, port_pids, red, safe_kill_pid, yel  # noqa: E402
 
 
 def _port_owned_by_docker(port: int) -> bool:

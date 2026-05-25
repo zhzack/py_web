@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from _common import APP_PORT, COMPOSE_SERVICE, cyn, grn, port_in_use, port_pids, red, require_docker, run, safe_kill_pid, yel  # noqa: E402
+from scripts.py._common import APP_PORT, COMPOSE_SERVICE, cyn, grn, port_in_use, port_pids, red, require_docker, run, safe_kill_pid, yel  # noqa: E402
 
 
 def is_port_taken_by_docker(port: int) -> bool:
