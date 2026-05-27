@@ -16,6 +16,7 @@ class DeviceCreate(DeviceBase):
 class DeviceUpdate(BaseModel):
     name: Optional[str] = None
     capabilities: Optional[List[str]] = None
+    owner_user_id: Optional[int] = None
 
 
 class DeviceOut(DeviceBase):

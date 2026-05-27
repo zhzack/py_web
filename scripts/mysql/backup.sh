@@ -13,7 +13,7 @@ source <(grep -v '^#' "$ENV_FILE" | sed 's/^/export /')
 CONTAINER_NAME="py_web_mysql"
 
 # 备份目录（项目根目录下的 backups）
-BACKUP_DIR="$PROJECT_ROOT/backups"
+BACKUP_DIR="$PROJECT_ROOT/scripts/mysql/backups"
 mkdir -p "$BACKUP_DIR"
 
 # 备份文件

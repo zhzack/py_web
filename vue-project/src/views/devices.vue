@@ -11,6 +11,7 @@ const rows = ref([])
 const online = ref([])
 const loading = ref(false)
 const dialog = reactive({ visible: false, form: { device_uuid: '', name: '', capabilities: [] } })
+const editDialog = reactive({ visible: false, form: { id: null, name: '', capabilities: [], owner_user_id: null } })
 const capOptions = ['usb_keyboard', 'usb_mouse', 'ble_keyboard', 'ble_mouse']
 
 async function load() {
@@ -34,6 +35,32 @@ async function submit() {
   load()
 }
 
+function openEdit(row) {
+  editDialog.form = {
+    id: row.id,
+    name: row.name,
+    capabilities: [...(row.capabilities || [])],
+    owner_user_id: row.owner_user_id,
+  }
+  editDialog.visible = true
+}
+
+async function submitEdit() {
+  await devicesApi.update(editDialog.form.id, {
+    name: editDialog.form.name,
+    capabilities: editDialog.form.capabilities,
+  })
+  ElMessage.success('更新成功')
+  editDialog.visible = false
+  load()
+}
+
+async function claimDevice(row) {
+  await devicesApi.claim(row.id)
+  ElMessage.success('认领成功')
+  load()
+}
+
 onMounted(load)
 </script>
 
@@ -52,6 +79,12 @@ onMounted(load)
           <el-tag v-for="c in row.capabilities" :key="c" size="small" style="margin-right:4px">{{ c }}</el-tag>
         </template>
       </el-table-column>
+      <el-table-column label="归属" width="90">
+        <template #default="{ row }">
+          <el-tag v-if="row.owner_user_id" type="success" size="small">已认领</el-tag>
+          <el-tag v-else type="info" size="small">待认领</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column label="实时状态" width="110">
         <template #default="{ row }">
           <el-tag :type="isOnline(row.device_uuid) ? 'success' : 'info'" size="small">
@@ -60,6 +93,12 @@ onMounted(load)
         </template>
       </el-table-column>
       <el-table-column prop="last_online_at" label="最后在线" width="180" />
+      <el-table-column label="操作" width="180">
+        <template #default="{ row }">
+          <el-button v-if="!row.owner_user_id" size="small" type="primary" @click="claimDevice(row)">认领</el-button>
+          <el-button size="small" @click="openEdit(row)">编辑</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </el-card>
 
@@ -80,6 +119,23 @@ onMounted(load)
     <template #footer>
       <el-button @click="dialog.visible = false">取消</el-button>
       <el-button type="primary" @click="submit">保存</el-button>
+    </template>
+  </el-dialog>
+
+  <el-dialog v-model="editDialog.visible" title="编辑设备" width="480px">
+    <el-form label-width="100px">
+      <el-form-item label="名称">
+        <el-input v-model="editDialog.form.name" />
+      </el-form-item>
+      <el-form-item label="能力">
+        <el-checkbox-group v-model="editDialog.form.capabilities">
+          <el-checkbox v-for="c in capOptions" :key="c" :label="c" :value="c" />
+        </el-checkbox-group>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <el-button @click="editDialog.visible = false">取消</el-button>
+      <el-button type="primary" @click="submitEdit">保存</el-button>
     </template>
   </el-dialog>
 </template>

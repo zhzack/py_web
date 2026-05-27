@@ -4,6 +4,7 @@ from .scripts import router as scripts_router
 from .auth import router as auth_router
 from .devices import router as devices_router
 from .macros import router as macros_router
+from .device_groups import router as device_groups_router
 
 router = APIRouter()
 router.include_router(health_router, prefix="/health", tags=["health"])
@@ -11,3 +12,4 @@ router.include_router(scripts_router, prefix="/scripts", tags=["scripts"])
 router.include_router(auth_router, prefix="/auth", tags=["auth"])
 router.include_router(devices_router, prefix="/devices", tags=["devices"])
 router.include_router(macros_router, prefix="/macros", tags=["macros"])
+router.include_router(device_groups_router, prefix="/device-groups", tags=["device-groups"])

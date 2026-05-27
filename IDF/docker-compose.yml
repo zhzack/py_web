@@ -1,0 +1,46 @@
+
+services:
+  esp-build:
+    build: .
+    volumes:
+      - .:/project
+    environment:
+      - HOME=/tmp
+    # 编译命令（默认）
+    command: idf.py build
+
+  # 交互式配置 menuconfig
+  menuconfig:
+    build: .
+    volumes:
+      - .:/project
+    environment:
+      - HOME=/tmp
+    stdin_open: true
+    tty: true
+    command: idf.py menuconfig
+
+  # 烧录（需要映射 USB）
+  flash:
+    build: .
+    volumes:
+      - .:/project
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    command: idf.py flash
+
+  # 串口监视器
+  monitor:
+    build: .
+    volumes:
+      - .:/project
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    command: idf.py monitor
+
+  # 清理
+  clean:
+    build: .
+    volumes:
+      - .:/project
+    command: idf.py clean

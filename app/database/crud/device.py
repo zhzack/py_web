@@ -74,6 +74,41 @@ def mark_offline(db: Session, device_uuid: str) -> None:
         db.commit()
 
 
+def claim_device(db: Session, device_id: int, user_id: int) -> Device:
+    """Claim an unclaimed device. Raises if already owned."""
+    dev = get_by_id(db, device_id)
+    if not dev:
+        raise ValueError("Device not found")
+    if dev.owner_user_id is not None:
+        raise ValueError("Device already claimed")
+    dev.owner_user_id = user_id
+    db.commit()
+    db.refresh(dev)
+    return dev
+
+
+def update_device(
+    db: Session,
+    device_id: int,
+    name: str | None = None,
+    capabilities: list[str] | None = None,
+    owner_user_id: int | None = None,
+) -> Device:
+    """Update device fields. Pass None to skip updating a field."""
+    dev = get_by_id(db, device_id)
+    if not dev:
+        raise ValueError("Device not found")
+    if name is not None:
+        dev.name = name
+    if capabilities is not None:
+        dev.capabilities = capabilities
+    if owner_user_id is not None:
+        dev.owner_user_id = owner_user_id
+    db.commit()
+    db.refresh(dev)
+    return dev
+
+
 def record_connection(db: Session, device_id: int, ip: str | None, session_id: str) -> DeviceConnection:
     conn = DeviceConnection(device_id=device_id, ip=ip, session_id=session_id)
     db.add(conn)

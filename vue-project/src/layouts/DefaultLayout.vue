@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import {
-  House, Cpu, VideoCamera, MagicStick, DocumentCopy, SwitchButton,
+  House, Cpu, VideoCamera, MagicStick, DocumentCopy, SwitchButton, Grid,
 } from '@element-plus/icons-vue'
 import { useAuthStore } from '@/stores/auth'
 
@@ -13,6 +13,7 @@ const router = useRouter()
 const menus = [
   { path: '/dashboard', title: '总览', icon: House },
   { path: '/devices',   title: '设备', icon: Cpu },
+  { path: '/device-groups', title: '设备组', icon: Grid },
   { path: '/console',   title: '实时控制', icon: VideoCamera },
   { path: '/macros',    title: '宏管理', icon: MagicStick },
   { path: '/logs',      title: '动作日志', icon: DocumentCopy },
